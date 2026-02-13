@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BT 下载工具（Windows）</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 24px; max-width: 860px; }
+    .card { border: 1px solid #ddd; padding: 16px; border-radius: 10px; margin-bottom: 14px; }
+    label { display: block; margin: 10px 0 4px; font-weight: 600; }
+    input[type='text'], input[type='file'] { width: 100%; padding: 8px; }
+    button { margin-right: 8px; padding: 8px 14px; cursor: pointer; }
+    .meta { display: grid; grid-template-columns: repeat(2, minmax(120px, 1fr)); gap: 8px; }
+    .warn { color: #9f5500; }
+    code { background: #f5f5f5; padding: 2px 4px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>BT 种子下载工具（不做应用层限速）</h1>
+  <p class="warn">说明：本工具本身不设置下载限速，实际速度取决于网络、资源健康度、ISP、磁盘性能等因素。</p>
+
+  <div class="card">
+    <label>种子链接（magnet 或 .torrent URL，可二选一）</label>
+    <input id="torrent_url" type="text" placeholder="magnet:?xt=urn:btih:..." />
+
+    <label>或上传 .torrent 文件</label>
+    <input id="torrent_file" type="file" accept=".torrent" />
+
+    <label>下载目录（Windows 示例：D:\\Downloads）</label>
+    <input id="download_dir" type="text" placeholder="D:\\Downloads" />
+
+    <div style="margin-top: 12px;">
+      <button id="start_btn">开始下载</button>
+      <button id="stop_btn">停止下载</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>状态</h3>
+    <div class="meta">
+      <div>状态：<strong id="status">idle</strong></div>
+      <div>进度：<strong id="progress">0%</strong></div>
+      <div>速度：<strong id="speed">-</strong></div>
+      <div>剩余：<strong id="eta">-</strong></div>
+    </div>
+    <p>日志：<span id="last_log">-</span></p>
+    <p>命令：<code id="command">-</code></p>
+    <p style="color: #b00020;">错误：<span id="error">-</span></p>
+  </div>
+
+  <div class="card">
+    <h3>Windows 使用说明</h3>
+    <ol>
+      <li>安装 Python 3.10+ 与 aria2（确保 <code>aria2c</code> 在 PATH 中）。</li>
+      <li>运行：<code>pip install -r requirements.txt</code></li>
+      <li>启动：<code>python app.py</code></li>
+      <li>浏览器打开：<code>http://127.0.0.1:5000</code></li>
+    </ol>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
